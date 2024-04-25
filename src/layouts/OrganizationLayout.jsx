@@ -16,7 +16,10 @@ function OrganizationLayout() {
             </a>
           </li>
           <li>
-            <a href="/organization/jobs" className="hover:text-blue-500">
+            <a
+              href="/organization/create-job-listing"
+              className="hover:text-blue-500"
+            >
               Post Jobs
             </a>
           </li>
