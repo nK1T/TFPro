@@ -117,14 +117,14 @@ const Home = () => {
               <input
                 type="text"
                 placeholder="Search jobs by title, company, or skills"
-                className="w-full px-10 py-3 rounded-3xl border border-transparent focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 text-white bg-gray-700"
+                className="w-full px-10 py-3 rounded-3xl border border-transparent focus:outline-none text-white bg-gray-700"
                 value={searchTerm}
                 onChange={handleSearch}
               />
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-green-500 hover:bg-green-700 text-white rounded-3xl focus:outline-none px-4 py-2 shadow-md transition duration-300"
+                className="absolute right-2 top-1/2 border-none transform -translate-y-1/2 bg-green-500 hover:bg-green-700 text-white rounded-3xl hover:outline-none focus:outline-none px-4 py-2 shadow-md transition duration-300"
               >
                 Search
               </button>
@@ -219,13 +219,11 @@ const Home = () => {
               >
                 <Link
                   to={topic.href}
-                  className={`text-green-500 font-medium ${topic.className}`}
+                  className={`text-green-500 font-bold ${topic.className}`}
                   target="_blank"
-                  // rel="noopener noreferrer"
                 >
                   {topic.name}
                 </Link>
-                {/* Display description on hover */}
                 {hoveredTopic === index && (
                   <p className="absolute bg-gray-600 text-green-500 p-3 rounded-lg mt-7 z-10">
                     {topic.description}
@@ -237,25 +235,31 @@ const Home = () => {
         </section>
       </div>
 
-      <div className="bg-green-700 py-32 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-white mb-2">
+      <div className="bg-green-700 py-20">
+        <div className="max-w-screen-2xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-white">
               Placement Opportunities
             </h2>
           </div>
-          <br />
-          <Marquee>
+
+          <Marquee
+            direction="left"
+            className="space-x-8 overflow-hidden rounded-lg shadow-md"
+          >
             {companies.map((company, index) => (
-              <div key={index} className="flex items-center mr-8">
-                <img
-                  src={company.logo}
-                  alt={company.name}
-                  className="h-12 mr-2"
-                />
+              <div key={index} className="mr-8">
+                <div className="w-32 h-32 p-1 bg-gray-800 rounded-lg shadow-md overflow-hidden flex justify-center items-center">
+                  <img
+                    src={company.logo}
+                    alt={company.name}
+                    className="max-h-24 max-w-full"
+                  />
+                </div>
               </div>
             ))}
           </Marquee>
+         
         </div>
       </div>
     </>
