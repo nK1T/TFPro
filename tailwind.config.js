@@ -24,7 +24,7 @@ export const theme = {
   extend: {
     backgroundColor: {
       primaryBg: "#005195",
-      secondaryBg: "#747467",
+      secondaryBg: "#286758",
       tertiaryBg: "#e3e1e1",
       tableHeadBg: "#747467b8",
       grayBg: "#f1f6f9",

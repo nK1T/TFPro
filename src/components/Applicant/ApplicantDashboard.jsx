@@ -1,95 +1,90 @@
-import { useState } from "react";
 import { MdMenu } from "react-icons/md";
+import { useState } from "react";
 
-const Dashboard = () => {
-  const [showMenu, setShowMenu] = useState(false); // Menu state
+function Dashboard() {
+  const [showMenu, setShowMenu] = useState(false); // State for Menu visibility
 
-  const handleMenuClick = () => {
-    setShowMenu(!showMenu);
-  };
+  const handleMenuClick = () => setShowMenu(!showMenu); // Toggle Menu visibility
+
+  // Replace these with actual data when available
+  const applicationsSubmitted = 5; // Dummy value
+  const interviewsScheduled = 2; // Dummy value
+  const offersReceived = 1; // Dummy value
 
   return (
-    <>
-      <div className="bg-gray-800 text-white min-h-screen flex flex-col relative rounded-xl">
-        {/* Welcome Section */}
-        <h1 className="text-4xl font-bold mb-4 text-blue-400 text-center p-5">
+    <div className="bg-black text-white min-h-screen flex flex-col relative rounded-3xl">
+      {/* Welcome Section with Flexbox for Alignment */}
+      <section className="flex items-center justify-between p-5">
+        <h1 className="text-4xl font-bold text-blue-400 text-center">
           Welcome, <span className="text-gray-200">Shivanshu Chobey</span>
-          {/* Menu Button */}
-          <MdMenu
-            className="text-white text-3xl absolute right-4 top-5 cursor-pointer"
-            onClick={handleMenuClick}
-          />
         </h1>
+        {/* Menu Button */}
+        <MdMenu
+          className="text-white text-3xl cursor-pointer"
+          onClick={handleMenuClick}
+        />
+      </section>
 
-        {/* Job Applications and Saved Jobs Section */}
-        <div className="flex justify-between w-full mb-4 p-3">
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4 w-1/2 mr-2">
-            <h2 className="text-2xl tex font-bold mb-2 text-green-400">
-              Job Applications
-            </h2>
-            <ul className="list-disc pl-4">
-              <li className="text-lg">
-                Software Engineer at Acme Inc. (Submitted on 2024-04-23) -
-                Pending
-              </li>
-              <li className="text-lg">
-                Front-end Developer at StartUp XYZ (Submitted on 2024-04-20) -
-                Rejected
-              </li>
-            </ul>
-          </div>
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4 w-1/2 ml-2">
-            <h2 className="text-2xl font-bold mb-2 text-green-400">
-              Saved Jobs
-            </h2>
-            <ul className="list-disc pl-4">
-              <li className="text-lg">Full Stack Developer at Tech Company</li>
-              <li className="text-lg">UI/UX Designer at Design Agency</li>
-            </ul>
-          </div>
+      {/* Progress Tracker Section */}
+      <section className="p-4">
+        <h2 className="text-2xl font-bold mb-4 text-green-400">
+          Progress Tracker
+        </h2>
 
-          {/* Menu Options */}
-          {showMenu && (
-            <div className="absolute top-16 right-4 w-48 shadow-lg rounded-lg bg-white z-50">
-              <ul className="list-none p-2 text-black cursor-pointer">
-                <li className="hover:bg-gray-100 px-2 py-1">Edit Profile</li>
-                <li className="hover:bg-gray-100 px-2 py-1">Change Password</li>
-                <li className="hover:bg-gray-100 px-2 py-1">Logout</li>
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {/* Applications and Interviews Section */}
-        <div className="bg-gray-900 text-white flex justify-center items-center py-8">
-          <div className="max-w-6xl grid grid-cols-2 gap-4">
-            <div className="bg-gray-800 shadow-lg rounded-lg p-20">
-              <h2 className="text-2xl font-bold mb-2 text-green-400">
-                Recent Applications
-              </h2>
-              <ul>
-                <li className="border-b border-gray-700 py-2">Application 1</li>
-                <li className="border-b border-gray-700 py-2">Application 2</li>
-                <li className="border-b border-gray-700 py-2">Application 3</li>
-                <li className="border-b border-gray-700 py-2">Application 4</li>
-              </ul>
-            </div>
-            <div className="bg-gray-800 shadow-lg rounded-lg p-20">
-              <h2 className="text-2xl font-bold mb-2 text-green-400">
-                Upcoming Interviews
-              </h2>
-              <ul>
-                <li className="border-b border-gray-700 py-2">Interview 1</li>
-                <li className="border-b border-gray-700 py-2">Interview 2</li>
-                <li className="border-b border-gray-700 py-2">Interview 3</li>
-                <li className="border-b border-gray-700 py-2">Interview 4</li>
-              </ul>
-            </div>
+        {/* Progress Bars */}
+        <div className="mb-4">
+          <p className="text-base mb-1">Applications Submitted</p>
+          <div className="bg-gray-600 h-3 rounded-full">
+            <div
+              className="bg-green-400 h-3 rounded-full"
+              style={{ width: `${applicationsSubmitted * 20}%` }}
+            ></div>
           </div>
         </div>
-      </div>
-    </>
+        <div className="mb-4">
+          <p className="text-base mb-1">Interviews Scheduled</p>
+          <div className="bg-gray-600 h-3 rounded-full">
+            <div
+              className="bg-blue-400 h-3 rounded-full"
+              style={{ width: `${interviewsScheduled * 20}%` }}
+            ></div>
+          </div>
+        </div>
+        <div>
+          <p className="text-base mb-1">Offers Received</p>
+          <div className="bg-gray-600 h-3 rounded-full">
+            <div
+              className="bg-yellow-400 h-3 rounded-full"
+              style={{ width: `${offersReceived * 20}%` }}
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      {/* Menu Options (Conditional Rendering) */}
+      {showMenu && (
+        <div
+          className="absolute top-16 right-4 w-48 shadow-lg rounded-lg bg-slate-900 text-white z-50"
+          onClick={() => setShowMenu(false)} // Close Menu on click anywhere
+        >
+          <ul className="list-none p-2 text-white cursor-pointer">
+            <li className="hover:bg-gray-100 px-2 py-1">Edit Profile</li>
+            <li className="hover:bg-gray-100 px-2 py-1">Change Password</li>
+            <li className="hover:bg-gray-100 px-2 py-1">Logout</li>
+          </ul>
+        </div>
+      )}
+
+      {/* Placeholder Section (Replace with future functionalities) */}
+      <section className="bg-black text-white flex justify-center items-center py-8">
+        <div className="max-w-6xl text-center">
+          <p className="text-xl text-gray-400">
+            More functionalities coming soon!
+          </p>
+        </div>
+      </section>
+    </div>
   );
-};
+}
 
 export default Dashboard;

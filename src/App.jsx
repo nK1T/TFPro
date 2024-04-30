@@ -12,6 +12,9 @@ import JobListings from "./components/Applicant/JobListings";
 import ApplicantProfile from "./components/Applicant/ApplicantProfile";
 import ApplicantLoginPage from "./components/Applicant/ApplicantLoginPage";
 import ApplicantSignupPage from "./components/Applicant/ApplicantSignupPage";
+import JobAppications from "./components/Applicant/JobAppications";
+import SavedJobs from "./components/Applicant/SavedJobs";
+import ChangePassword from "./components/Applicant/ChangePassword";
 
 // Organization Components
 import OrganizationDashboard from "./components/Organization/OrganizationDashboard";
@@ -38,6 +41,9 @@ function App() {
           <Route path="job-listings" element={<JobListings />} />
           <Route path="profile" element={<ApplicantProfile />} />
           <Route path="profile2" element={<ApplicantProfile2 />} />
+          <Route path="job-applications" element={<JobAppications />} />
+          <Route path="saved-jobs" element={<SavedJobs />} />
+          <Route path="change-password" element={<ChangePassword />} />
         </Route>
 
         {/* Organization Routes (nested under /organization) */}
