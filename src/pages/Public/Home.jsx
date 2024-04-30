@@ -106,25 +106,25 @@ const Home = () => {
 
   return (
     <>
-      <div className="bg-gray-950">
+      <div className="bg-black">
         <br />
         <div className="max-w-[80%] w-full mx-auto mb-8">
-          <h2 className="text-3xl font-bold mb-4 text-center text-green-500">
+          <h2 className="text-3xl font-bold mb-4 text-center text-white">
             Find Your Next Opportunity
           </h2>
-          <div className="flex items-center justify-center h-16 w-full m-auto rounded-full bg-gray-700 shadow-md">
+          <div className="flex items-center justify-center h-16 w-full m-auto rounded-full bg-slate-900 shadow-md">
             <div className="relative w-full">
               <input
                 type="text"
                 placeholder="Search jobs by title, company, or skills"
-                className="w-full px-10 py-3 rounded-3xl border border-transparent focus:outline-none text-white bg-gray-700"
+                className="w-full px-10 py-3 rounded-3xl border border-transparent focus:outline-none text-white bg-slate-900"
                 value={searchTerm}
                 onChange={handleSearch}
               />
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="absolute right-2 top-1/2 border-none transform -translate-y-1/2 bg-green-500 hover:bg-green-700 text-white rounded-3xl hover:outline-none focus:outline-none px-4 py-2 shadow-md transition duration-300"
+                className="absolute right-2 top-1/2 border-none transform -translate-y-1/2 bg-white hover:bg-[#286758] text-black font-bold rounded-3xl hover:outline-none hover:text-white focus:outline-none px-4 py-2 shadow-md transition duration-300"
               >
                 Search
               </button>
@@ -136,7 +136,7 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[80%] w-full mx-auto">
-          <div className="flex flex-col items-center py-8 px-10 space-y-6 bg-green-700 rounded-3xl shadow-md transition duration-300 transform hover:scale-105">
+          <div className="flex flex-col items-center py-8 px-10 space-y-6 bg-[#286758] rounded-3xl shadow-md transition duration-300 transform hover:scale-105">
             <h3 className="text-xl font-semibold text-white text-center">
               Applicants
             </h3>
@@ -164,7 +164,7 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="flex flex-col items-center py-8 px-10 space-y-6 bg-gray-800 rounded-3xl shadow-md transition duration-300 transform hover:scale-105">
+          <div className="flex flex-col items-center py-8 px-10 space-y-6 bg-slate-900 rounded-3xl shadow-md transition duration-300 transform hover:scale-105">
             <h3 className="text-xl font-semibold text-white text-center">
               Organizations
             </h3>
@@ -196,12 +196,12 @@ const Home = () => {
         <section className="section flex flex-wrap justify-evenly py-40 items-center">
           <div className="w-full max-w-3xl px-4">
             <h2
-              className="text-2xl font-semibold mb-4 text-green-500"
+              className="text-2xl font-semibold mb-4 text-[#286758]"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
               Explore Collaborative Articles
             </h2>
-            <p className="text-gray-400">
+            <p className="text-white">
               Dive deeper into the topics that matter to you. Explore a wide
               range of content categorized by industry, skill, or interest. Find
               curated articles, tutorials, and resources to help you learn and
@@ -213,13 +213,13 @@ const Home = () => {
             {topics.map((topic, index) => (
               <li
                 key={index}
-                className="relative rounded-lg bg-gray-700 shadow-md px-4 py-2 hover:bg-gray-600 transition duration-300"
-                onMouseEnter={() => setHoveredTopic(index)}
-                onMouseLeave={() => setHoveredTopic(null)}
+                className="relative rounded-lg bg-slate-900 shadow-md px-4 py-2 hover:bg-slate-800 transition duration-300"
+                // onMouseEnter={() => setHoveredTopic(index)}
+                // onMouseLeave={() => setHoveredTopic(null)}
               >
                 <Link
                   to={topic.href}
-                  className={`text-green-500 font-bold ${topic.className}`}
+                  className={`text-white font-bold ${topic.className}`}
                   target="_blank"
                 >
                   {topic.name}
@@ -235,7 +235,7 @@ const Home = () => {
         </section>
       </div>
 
-      <div className="bg-green-700 py-20">
+      <div className="bg-[#286758] py-20">
         <div className="max-w-screen-2xl mx-auto">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-white">
@@ -249,7 +249,7 @@ const Home = () => {
           >
             {companies.map((company, index) => (
               <div key={index} className="mr-8">
-                <div className="w-32 h-32 p-1 bg-gray-800 rounded-lg shadow-md overflow-hidden flex justify-center items-center">
+                <div className="w-32 h-32 p-1 bg-slate-900 rounded-lg shadow-md overflow-hidden flex justify-center items-center">
                   <img
                     src={company.logo}
                     alt={company.name}
@@ -259,7 +259,6 @@ const Home = () => {
               </div>
             ))}
           </Marquee>
-         
         </div>
       </div>
     </>

@@ -114,7 +114,7 @@ const ApplicantProfile = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white px-4 py-8">
+    <div className="bg-black text-white px-4 py-8 rounded-3xl">
       {/* Title Section */}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-4xl font-bold text-center text-green-400">
@@ -122,7 +122,7 @@ const ApplicantProfile = () => {
         </h1>
         <button
           onClick={editProfile}
-          className="flex items-center text-sm text-white bg-gray-600 py-1 px-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600"
+          className="flex items-center text-sm text-black bg-286758 py-1 px-2 rounded-md hover:bg-000000 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-286758"
         >
           <MdEdit className="mr-2" />
           Edit Profile
@@ -133,7 +133,7 @@ const ApplicantProfile = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           {/* Personal Information Section */}
-          <div className="flex flex-col md:flex-row md:items-center bg-gray-700 shadow-lg rounded-lg p-4">
+          <div className="flex flex-col md:flex-row md:items-center bg-286758 shadow-lg rounded-lg p-4">
             {/* Profile Photo */}
             <img
               src={profilePhoto}
@@ -154,7 +154,7 @@ const ApplicantProfile = () => {
                   <a href={""} target="_blank" rel="noreferrer">
                     <FontAwesomeIcon
                       icon={faGithub}
-                      className="text-black hover:text-gray-500"
+                      className="text-white hover:text-gray-500"
                     />
                   </a>
                 </span>
@@ -166,12 +166,12 @@ const ApplicantProfile = () => {
           </div>
 
           {/* Summary Section */}
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4 mt-4">
+          <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
             <h2 className="text-2xl font-bold mb-2 text-green-400">Summary</h2>
             <p className="text-lg">{summary}</p>
           </div>
           {/* Skills Section */}
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4 mt-4">
+          <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
             <h2 className="text-2xl font-bold mb-2 text-green-400">Skills</h2>
             {skills.map((skill) => (
               <SkillBar
@@ -182,7 +182,7 @@ const ApplicantProfile = () => {
             ))}
           </div>
           {/* Projects Section */}
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4 mt-4">
+          <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
             <h2 className="text-2xl font-bold mb-2 text-green-400">Projects</h2>
             {projects.map((project) => (
               <div key={project.title} className="mb-2">
@@ -199,7 +199,7 @@ const ApplicantProfile = () => {
           </div>
           {/* Awards Section (if applicable) */}
           {awards.length > 0 && (
-            <div className="bg-gray-700 shadow-lg rounded-lg p-4 mt-4">
+            <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
               <h2 className="text-2xl font-bold mb-2 text-green-400">Awards</h2>
               <ul className="list-disc pl-4">
                 {awards.map((award) => (
@@ -212,7 +212,7 @@ const ApplicantProfile = () => {
           )}
           {/* Languages Section (if applicable) */}
           {languages.length > 0 && (
-            <div className="bg-gray-700 shadow-lg rounded-lg p-4 mt-4">
+            <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
               <h2 className="text-2xl font-bold mb-2 text-green-400">
                 Languages
               </h2>
@@ -229,7 +229,7 @@ const ApplicantProfile = () => {
 
         <div>
           {/* Experience Section */}
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4">
+          <div className="bg-286758 shadow-lg rounded-lg p-4">
             <h2 className="text-2xl font-bold mb-2 text-blue-400">Experience</h2>
             {experience.map((exp) => (
               <div key={exp.company} className="mb-4">
@@ -244,7 +244,7 @@ const ApplicantProfile = () => {
           </div>
 
           {/* Education Section */}
-          <div className="bg-gray-700 shadow-lg rounded-lg p-4 mt-4">
+          <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
             <h2 className="text-2xl font-bold mb-2 text-blue-400">Education</h2>
             {education.map((edu) => (
               <div key={edu.institution} className="mb-4">
@@ -258,7 +258,7 @@ const ApplicantProfile = () => {
 
           {/* Download Resume Button */}
           <button
-            className="flex items-center justify-center px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-4"
+            className="flex items-center justify-center px-4 py-2 bg-286758 text-black rounded-md hover:bg-000000 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-286758 mt-4"
             onClick={downloadResume}
           >
             <MdDownload className="mr-2 h-5 w-5" />

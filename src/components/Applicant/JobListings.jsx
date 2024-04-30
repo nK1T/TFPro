@@ -147,14 +147,14 @@ const JobListing = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white py-8">
+    <div className="bg-black text-white py-8 rounded-3xl">
       <div className="max-w-7xl mx-auto px-4">
         <h1 className="text-3xl font-bold mb-8 text-green-400">Job Listings</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
           {jobs.map((job) => (
             <div
               key={job.title}
-              className="bg-gray-700 shadow-lg rounded-lg overflow-hidden relative"
+              className="bg-slate-900 shadow-lg rounded-3xl overflow-hidden relative"
             >
               <div className="px-6 py-4">
                 <h2 className="text-xl font-medium mb-2 text-white">
