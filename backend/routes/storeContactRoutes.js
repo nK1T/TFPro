@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const mysql = require("mysql");
+// const config = require("./config");
+require("dotenv").config();
 
 // Create MySQL connection pool
 const pool = mysql.createPool({
-  host: "srv1002.hstgr.io",
-  user: "u407107406_shivanshu",
-  password: "Shivanshu@chobeytf123567",
-  database: "u407107406_tfpro",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
 });
 
 // Route to store contact information

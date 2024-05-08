@@ -4,6 +4,7 @@ const jobRoutes = require("./routes/jobRoutes");
 const profileRoutes = require("./routes/profileRoutes");
 const formRoutes = require("./routes/formRoutes");
 const storeContactRoutes = require("./routes/storeContactRoutes"); // Import storeContactRoutes
+require("dotenv").config();
 
 const app = express();
 
