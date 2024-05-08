@@ -1,9 +1,8 @@
 # .gitignore file
 
-config.js
-
-# Ignore .env file containing sensitive information
+# Ignore .env and config.js file containing sensitive information
 .env
+config.js
 
 # Ignore node_modules directory
 node_modules/
