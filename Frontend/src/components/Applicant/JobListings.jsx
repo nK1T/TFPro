@@ -23,6 +23,21 @@ const JobListing = () => {
     }
   };
 
+  // Function to format UTC time to Indian Standard Time (IST)
+  const formatIndianTime = (utcTimeString) => {
+    const utcDate = new Date(utcTimeString);
+    utcDate.setMinutes(utcDate.getMinutes() + 330); // Add 330 minutes (5 hours and 30 minutes) for IST offset
+    return utcDate.toLocaleString("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  };
+
   return (
     <div className="bg-black text-white py-8 rounded-3xl">
       <div className="max-w-7xl mx-auto px-4">
@@ -30,13 +45,14 @@ const JobListing = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
           {jobs.map((job) => (
             <div
-              key={job.title}
+              key={job.id} // Assuming job.id is a unique identifier for each job
               className="bg-slate-900 shadow-lg rounded-3xl overflow-hidden relative"
             >
               <div className="px-6 py-4">
                 <div className="flex items-center justify-between">
+                  {/* Display formatted Indian Standard Time */}
                   <span className="text-sm text-gray-500 mb-2">
-                    {new Date(job.createdAt).toLocaleString()}
+                    {formatIndianTime(job.createdAt)}
                   </span>
                 </div>
                 <h2 className="text-xl font-medium mb-2 text-white">

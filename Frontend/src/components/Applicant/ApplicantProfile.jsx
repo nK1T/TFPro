@@ -1,119 +1,60 @@
-// import { MdDownload, MdEdit } from "react-icons/md";
-// import profilePhoto from "../../assets/Screenshot 2024-04-23 125658.png"; // Import your profile photo
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+// import { MdEdit } from "react-icons/md";
 // import { useAuth0 } from "@auth0/auth0-react";
 
-// const applicantData = {
-//   name: "Shivanshu Chobey",
-//   email: "shivanshu.chobey@gmail.com",
-//   phone: "+91-8120138215",
-//   linkedin: "https://www.linkedin.com",
-//   summary:
-//     "Highly motivated software engineer with 2+ years of experience in web development. Skilled in React, Node.js, HTML, CSS, and JavaScript. Seeking a challenging role to utilize my skills and contribute to a growing team.",
-//   skills: [
-//     { name: "JavaScript", level: "Advanced" },
-//     { name: "React", level: "Proficient" },
-//     { name: "Node.js", level: "Intermediate" },
-//     { name: "HTML", level: "Advanced" },
-//     { name: "CSS", level: "Proficient" },
-//   ],
-//   experience: [
-//     {
-//       company: "Acme Inc.",
-//       position: "Software Engineer",
-//       duration: "2 years",
-//       description: "Developed web applications using React and Node.js",
-//     },
-//     {
-//       company: "StartUp XYZ",
-//       position: "Front-end Developer",
-//       duration: "1 year",
-//       description: "Built responsive websites with HTML, CSS, and JavaScript",
-//     },
-//   ],
-//   education: [
-//     {
-//       institution: "University of Technology",
-//       degree: "Bachelor of Science in Computer Science",
-//       graduationYear: 2020,
-//     },
-//   ],
-//   projects: [
-//     {
-//       title: "Personal Portfolio Website",
-//       url: "https://johndoeportfolio.com",
-//     },
-//     {
-//       title: "E-commerce Platform",
-//       url: "https://github.com/johndoe/e-commerce-app",
-//     },
-//   ],
-//   awards: ["Dean's List (2018-2020)"],
-//   languages: ["English (fluent)", "Spanish (conversational)"],
-// };
+// const ApplicantProfile = () => {
+//   const { user } = useAuth0();
+//   const { email, name, picture } = user;
 
-// const progressColorMap = {
-//   Beginner: "#cccccc",
-//   Intermediate: "#ffc107",
-//   Proficient: "#2196f3",
-//   Advanced: "#4caf50",
-// };
+//   const [formData, setFormData] = useState({
+//     contactNo: "",
+//     summary: "",
+//   });
+//   const [showForm, setShowForm] = useState(false);
 
-// const SkillBar = ({ name, level }) => {
-//   const progressStyle = {
-//     width: `${
-//       level === "Advanced" ? 100 : level === "Intermediate" ? 50 : 25
-//     }%`,
-//     backgroundColor: progressColorMap[level],
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await axios.get("http://localhost:5000/store-contact");
+//         const data = response.data;
+//         setFormData(data);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//       }
+//     };
+//     fetchData();
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [name]: value,
+//     }));
 //   };
 
-//   return (
-//     <div className="flex items-center mb-2">
-//       <p className="text-md mr-2">{name}</p>
-//       <div className="w-full h-2 rounded-full bg-gray-200">
-//         <div className="h-full rounded-full" style={progressStyle}></div>
-//       </div>
-//       <p
-//         className={`text-md ml-2 ${
-//           level === "Advanced"
-//             ? "text-green-400"
-//             : level === "Intermediate"
-//             ? "text-yellow-400"
-//             : "text-blue-400" // Changed color to blue for Proficient
-//         } font-medium`}
-//       >
-//         {level}
-//       </p>
-//     </div>
-//   );
-// };
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
 
-// const ApplicantProfile = () => {
-//     const { isAuthenticated, loginWithRedirect, user } = useAuth0();
-
-//   const {
-//     name,
-//     email,
-//     phone,
-//     linkedin,
-//     summary,
-//     skills,
-//     experience,
-//     education,
-//     projects,
-//     awards,
-//     languages,
-//   } = applicantData;
-
-//   const downloadResume = () => {
-//     // Simulate resume download (replace with actual resume generation logic)
-//     alert("Downloading resume...");
+//     try {
+//       await axios.post("http://localhost:5000/store-contact", {
+//         name,
+//         email,
+//         picture,
+//         ...formData,
+//       });
+//       setShowForm(false);
+//       alert("Profile updated!");
+//     } catch (error) {
+//       console.error("Error updating profile:", error);
+//       alert("Failed to update profile. Please try again later.");
+//     }
 //   };
 
 //   const editProfile = () => {
-//     // Functionality for editing profile goes here
-//     alert("Editing profile...");
+//     setShowForm(true);
 //   };
 
 //   return (
@@ -125,7 +66,7 @@
 //         </h1>
 //         <button
 //           onClick={editProfile}
-//           className="flex items-center text-sm text-black bg-286758 py-1 px-2 rounded-md hover:bg-000000 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-286758"
+//           className="flex items-center text-sm text-white bg-gray-800 py-1 px-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
 //         >
 //           <MdEdit className="mr-2" />
 //           Edit Profile
@@ -136,10 +77,10 @@
 //       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 //         <div>
 //           {/* Personal Information Section */}
-//           <div className="flex flex-col md:flex-row md:items-center bg-286758 shadow-lg rounded-lg p-4">
+//           <div className="flex flex-col md:flex-row md:items-center bg-gray-800 shadow-lg rounded-lg p-4">
 //             {/* Profile Photo */}
 //             <img
-//               src={user.picture}
+//               src={picture}
 //               alt="Profile"
 //               className="w-32 h-32 rounded-full mr-4 md:mr-8 mb-4 md:mb-0"
 //             />
@@ -147,211 +88,155 @@
 //             <div className="flex-grow">
 //               <h2 className="text-2xl font-bold mb-2 text-green-400 flex items-center">
 //                 Personal Information
-//                 <span className="ml-4">
-//                   <a href={linkedin} target="_blank" rel="noreferrer">
-//                     <FontAwesomeIcon
-//                       icon={faLinkedin}
-//                       className="text-blue-500 hover:text-blue-700 mr-2"
-//                     />
-//                   </a>
-//                   <a href={""} target="_blank" rel="noreferrer">
-//                     <FontAwesomeIcon
-//                       icon={faGithub}
-//                       className="text-white hover:text-gray-500"
-//                     />
-//                   </a>
-//                 </span>
 //               </h2>
-//               <p className="text-lg font-medium mb-2">Name: {user.name}</p>
-//               <p className="text-lg font-medium mb-2">Email: {user.email}</p>
-//               <p className="text-lg font-medium mb-2">Phone: {phone}</p>
+//               <p className="text-lg font-medium mb-2">Name: {name}</p>
+//               <p className="text-lg font-medium mb-2">Email: {email}</p>
+//               <p className="text-lg font-medium mb-2">Contact: {formData.contactNo}</p>
+//               <p className="text-lg font-medium mb-2">Summary: {formData.summary}</p>
 //             </div>
 //           </div>
-
-//           {/* Summary Section */}
-//           <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
-//             <h2 className="text-2xl font-bold mb-2 text-green-400">Summary</h2>
-//             <p className="text-lg">{summary}</p>
-//           </div>
-//           {/* Skills Section */}
-//           <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
-//             <h2 className="text-2xl font-bold mb-2 text-green-400">Skills</h2>
-//             {skills.map((skill) => (
-//               <SkillBar
-//                 key={skill.name}
-//                 name={skill.name}
-//                 level={skill.level}
-//               />
-//             ))}
-//           </div>
-//           {/* Projects Section */}
-//           <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
-//             <h2 className="text-2xl font-bold mb-2 text-green-400">Projects</h2>
-//             {projects.map((project) => (
-//               <div key={project.title} className="mb-2">
-//                 <a
-//                   href={project.url}
-//                   target="_blank"
-//                   rel="noreferrer"
-//                   className="text-blue-500 underline hover:text-blue-700"
-//                 >
-//                   {project.title}
-//                 </a>
-//               </div>
-//             ))}
-//           </div>
-//           {/* Awards Section (if applicable) */}
-//           {awards.length > 0 && (
-//             <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
-//               <h2 className="text-2xl font-bold mb-2 text-green-400">Awards</h2>
-//               <ul className="list-disc pl-4">
-//                 {awards.map((award) => (
-//                   <li key={award} className="text-lg font-medium">
-//                     {award}
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}
-//           {/* Languages Section (if applicable) */}
-//           {languages.length > 0 && (
-//             <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
-//               <h2 className="text-2xl font-bold mb-2 text-green-400">
-//                 Languages
-//               </h2>
-//               <ul className="list-disc pl-4">
-//                 {languages.map((lang) => (
-//                   <li key={lang} className="text-lg font-medium">
-//                     {lang}
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}
-//         </div>
-
-//         <div>
-//           {/* Experience Section */}
-//           <div className="bg-286758 shadow-lg rounded-lg p-4">
-//             <h2 className="text-2xl font-bold mb-2 text-blue-400">Experience</h2>
-//             {experience.map((exp) => (
-//               <div key={exp.company} className="mb-4">
-//                 <h3 className="text-lg font-bold mb-1">{exp.company}</h3>
-//                 <p className="text-md text-blue-400">
-//                   {exp.position} ({exp.duration})
-//                 </p>
-
-//                 <p className="text-gray-300">{exp.description}</p>
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Education Section */}
-//           <div className="bg-286758 shadow-lg rounded-lg p-4 mt-4">
-//             <h2 className="text-2xl font-bold mb-2 text-blue-400">Education</h2>
-//             {education.map((edu) => (
-//               <div key={edu.institution} className="mb-4">
-//                 <h3 className="text-lg font-bold mb-1">{edu.institution}</h3>
-//                 <p className="text-md text-blue-400">
-//                   {edu.degree} ({edu.graduationYear})
-//                 </p>
-//               </div>
-//             ))}
-//           </div>
-
-//           {/* Download Resume Button */}
-//           <button
-//             className="flex items-center justify-center px-4 py-2 bg-286758 text-black rounded-md hover:bg-000000 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-286758 mt-4"
-//             onClick={downloadResume}
-//           >
-//             <MdDownload className="mr-2 h-5 w-5" />
-//             Download Resume
-//           </button>
 //         </div>
 //       </div>
+
+//       {/* Form Modal */}
+//       {showForm && (
+//         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-75 z-50">
+//           <div className="bg-gray-800 p-8 rounded-lg">
+//             <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+//             <form onSubmit={handleSubmit}>
+//               <div className="mb-4">
+//                 <label htmlFor="contact" className="block mb-1">
+//                   Contact:
+//                 </label>
+//                 <input
+//                   type="text"
+//                   id="contact"
+//                   name="contactNo"
+//                   value={formData.contactNo}
+//                   onChange={handleChange}
+//                   className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white"
+//                 />
+//               </div>
+//               <div className="mb-4">
+//                 <label htmlFor="summary" className="block mb-1">
+//                   Summary:
+//                 </label>
+//                 <textarea
+//                   id="summary"
+//                   name="summary"
+//                   value={formData.summary}
+//                   onChange={handleChange}
+//                   className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white"
+//                 />
+//               </div>
+//               <div className="text-right">
+//                 <button
+//                   type="submit"
+//                   className="px-4  py-2 bg-286758 text-black rounded-md hover:bg-green-600 hover:text-white border-none"
+//                 >
+//                   Save
+//                 </button>
+//                 <button
+//                   type="button"
+//                   onClick={() => setShowForm(false)}
+//                   className="px-4 py-2 bg-red-600 text-white rounded-md ml-2 hover:bg-red-700 border-none"
+//                 >
+//                   Cancel
+//                 </button>
+//               </div>
+//             </form>
+//           </div>
+//         </div>
+//       )}
 //     </div>
 //   );
 // };
 
 // export default ApplicantProfile;
 
-
-
-
-
-
-
-
-import React, { useState, useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { MdEdit } from "react-icons/md";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ApplicantProfile = () => {
   const { user } = useAuth0();
-  const [isEditing, setIsEditing] = useState(false);
-  const [contact, setContact] = useState("");
-  const [summary, setSummary] = useState("");
-  const [submittedContacts, setSubmittedContacts] = useState([]);
+  const { email, name, picture } = user;
 
-  // Fetch user profile data when the component mounts
+  const [formData, setFormData] = useState({
+    contactNo: "",
+    summary: "",
+  });
+  const [educationFormData, setEducationFormData] = useState({
+    institution: "",
+    degree: "",
+    fieldOfStudy: "",
+    graduationYear: ""
+  });
+  const [experienceFormData, setExperienceFormData] = useState({
+    company: "",
+    position: "",
+    startDate: "",
+    endDate: ""
+  });
+  const [showForm, setShowForm] = useState(false);
+
   useEffect(() => {
-    const fetchProfileData = async () => {
+    const fetchData = async () => {
       try {
-        // Send GET request to retrieve user profile data
         const response = await axios.get("http://localhost:5000/store-contact");
-        setSubmittedContacts(response.data);
+        const data = response.data;
+        setFormData(data);
       } catch (error) {
-        console.error("Error fetching profile data:", error);
+        console.error("Error fetching data:", error);
       }
     };
-
-    fetchProfileData();
+    fetchData();
   }, []);
 
-  // Function to handle "Edit Profile" button click
-  const handleEditProfile = () => {
-    setIsEditing(true);
-    // Prefill the summary field with existing summary, if available
-    setSummary(
-      submittedContacts.length > 0
-        ? submittedContacts[submittedContacts.length - 1].summary
-        : ""
-    );
-  };
-
-  // Function to save updated contact and summary
-  const handleSaveProfile = async () => {
-    setIsEditing(false);
-    try {
-      // Send POST request to update contact and summary
-      await axios.post("http://localhost:5000/store-contact", {
-        contact,
-        summary,
-      });
-      const updatedContact = { contactNo: contact, summary };
-      setSubmittedContacts([...submittedContacts, updatedContact]);
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
-
-  // Function to handle form submission
-  const handleSubmit = async (e) => {
+  const handleContactSummarySubmit = async (e) => {
     e.preventDefault();
+
     try {
-      // Send POST request to store contact information
       await axios.post("http://localhost:5000/store-contact", {
-        contact,
-        summary,
+        name,
+        email,
+        picture,
+        ...formData,
       });
-      alert("Contact information submitted successfully!");
-      const updatedContact = { contactNo: contact, summary };
-      setSubmittedContacts([...submittedContacts, updatedContact]);
-      setIsEditing(false); // Hide form after submission
+      alert("Contact and summary updated!");
     } catch (error) {
-      console.error("Error submitting contact information:", error);
-      alert("Failed to submit contact information. Please try again.");
+      console.error("Error updating contact and summary:", error);
+      alert("Failed to update contact and summary. Please try again later.");
     }
+  };
+
+  const handleEducationSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:5000/education", educationFormData);
+      alert("Education details updated!");
+    } catch (error) {
+      console.error("Error updating education details:", error);
+      alert("Failed to update education details. Please try again later.");
+    }
+  };
+
+  const handleExperienceSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post("http://localhost:5000/experience", { email, ...experienceFormData, });
+      alert("Experience details updated!");
+    } catch (error) {
+      console.error("Error updating experience details:", error);
+      alert("Failed to update experience details. Please try again later.");
+    }
+  };
+
+  const editProfile = () => {
+    setShowForm(true);
   };
 
   return (
@@ -361,90 +246,187 @@ const ApplicantProfile = () => {
         <h1 className="text-4xl font-bold text-center text-green-400">
           Applicant Profile
         </h1>
-        {!isEditing && (
-          <button
-            onClick={handleEditProfile}
-            className="flex items-center text-sm text-black bg-286758 py-1 px-2 rounded-md hover:bg-000000 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-286758"
-          >
-            Edit Profile
-          </button>
-        )}
+        <button
+          onClick={editProfile}
+          className="flex items-center text-sm text-white bg-gray-800 py-1 px-2 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+        >
+          <MdEdit className="mr-2" />
+          Edit Profile
+        </button>
       </div>
 
       {/* Profile Content Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           {/* Personal Information Section */}
-          <div className="flex flex-col md:flex-row md:items-center bg-286758 shadow-lg rounded-lg p-4">
+          <div className="flex flex-col md:flex-row md:items-center bg-gray-800 shadow-lg rounded-lg p-4">
             {/* Profile Photo */}
             <img
-              src={user.picture}
+              src={picture}
               alt="Profile"
               className="w-32 h-32 rounded-full mr-4 md:mr-8 mb-4 md:mb-0"
             />
 
             <div className="flex-grow">
-              <h2 className="text-2xl font-bold mb-2 text-green-400">
+              <h2 className="text-2xl font-bold mb-2 text-green-400 flex items-center">
                 Personal Information
               </h2>
-              <p className="text-lg font-medium mb-2">Name: {user.name}</p>
-              <p className="text-lg font-medium mb-2">Email: {user.email}</p>
-              {!isEditing && submittedContacts.length > 0 && (
-                <div>
-                  <p className="text-lg font-medium mb-2">
-                    Contact:{" "}
-                    {submittedContacts[submittedContacts.length - 1].contactNo}
-                  </p>
-                  <p className="text-lg font-medium mb-2">
-                    Summary:{" "}
-                    {submittedContacts[submittedContacts.length - 1].summary}
-                  </p>
-                </div>
-              )}
+              <p className="text-lg font-medium mb-2">Name: {name}</p>
+              <p className="text-lg font-medium mb-2">Email: {email}</p>
+              <p className="text-lg font-medium mb-2">Contact: {formData.contactNo}</p>
+              <p className="text-lg font-medium mb-2">Summary: {formData.summary}</p>
             </div>
           </div>
         </div>
-        {isEditing && (
-          <div>
-            {/* Edit Profile Form */}
-            <form
-              onSubmit={handleSubmit}
-              className="bg-286758 shadow-lg rounded-lg p-4"
-            >
-              <h2 className="text-2xl font-bold mb-2 text-green-400">
-                Edit Profile
-              </h2>
-              <label htmlFor="contact" className="text-lg font-medium mb-2">
-                Contact:
-              </label>
-              <input
-                type="text"
-                id="contact"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                className="py-1 px-2 rounded-md mb-2"
-              />
-              <label htmlFor="summary" className="text-lg font-medium mb-2">
-                Summary:
-              </label>
-              <textarea
-                id="summary"
-                value={summary}
-                onChange={(e) => setSummary(e.target.value)}
-                className="py-1 px-2 rounded-md mb-2 h-24"
-              />
-              <button
-                onClick={handleSaveProfile}
-                className="bg-286758 text-white py-1 px-2 rounded-md hover:bg-000000 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-286758"
-              >
-                Save
-              </button>
-            </form>
-          </div>
-        )}
       </div>
+
+      {/* Form Modal */}
+      {showForm && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-700 bg-opacity-75 z-50">
+          <div className="bg-gray-800 p-8 rounded-lg">
+            <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
+            <form onSubmit={handleContactSummarySubmit}>
+              <div className="mb-4">
+                <label htmlFor="contact" className="block mb-1">
+                  Contact:
+                </label>
+                <input
+                  type="text"
+                  id="contact"
+                  name="contactNo"
+                  value={formData.contactNo}
+                  onChange={(e) => setFormData((prevData) => ({ ...prevData, contactNo: e.target.value }))}
+                  className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white"
+                />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="summary" className="block mb-1">
+                  Summary:
+                </label>
+                <textarea
+                  id="summary"
+                  name="summary"
+                  value={formData.summary}
+                  onChange={(e) => setFormData((prevData) => ({ ...prevData, summary: e.target.value }))}
+                  className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white"
+                />
+              </div>
+              <div className="text-right">
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-286758 text-black rounded-md hover:bg-green-600 hover:text-white border-none"
+                >
+                  Save Contact & Summary
+                </button>
+              </div>
+            </form>
+            <form onSubmit={handleEducationSubmit}>
+              {/* Education Section */}
+              <div className="mb-4">
+                <h3 className="text-lg font-bold mb-2 text-green-400">Education</h3>
+                <div className="flex flex-col md:flex-row md:items-center mb-4">
+                  <input
+                    type="text"
+                    name="institution"
+                    value={educationFormData.institution}
+                    onChange={(e) => setEducationFormData((prevData) => ({ ...prevData, institution: e.target.value }))}
+                    placeholder="Institution"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mr-2 mb-2 md:mb-0"
+                  />
+                  <input
+                    type="text"
+                    name="degree"
+                    value={educationFormData.degree}
+                    onChange={(e) => setEducationFormData((prevData) => ({ ...prevData, degree: e.target.value }))}
+                    placeholder="Degree"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mr-2 mb-2 md:mb-0"
+                  />
+                  <input
+                    type="text"
+                    name="fieldOfStudy"
+                    value={educationFormData.fieldOfStudy}
+                    onChange={(e) => setEducationFormData((prevData) => ({ ...prevData, fieldOfStudy: e.target.value }))}
+                    placeholder="Field of Study"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mr-2 mb-2 md:mb-0"
+                  />
+                  <input
+                    type="text"
+                    name="graduationYear"
+                    value={educationFormData.graduationYear}
+                    onChange={(e) => setEducationFormData((prevData) => ({ ...prevData, graduationYear: e.target.value }))}
+                    placeholder="Graduation Year"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mb-2 md:mb-0"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 border-none"
+                >
+                  Add Education
+                </button>
+              </div>
+            </form>
+            <form onSubmit={handleExperienceSubmit}>
+              {/* Experience Section */}
+              <div className="mb-4">
+                <h3 className="text-lg font-bold mb-2 text-green-400">Experience</h3>
+                <div className="flex flex-col md:flex-row md:items-center mb-4">
+                  <input
+                    type="text"
+                    name="company"
+                    value={experienceFormData.company}
+                    onChange={(e) => setExperienceFormData((prevData) => ({ ...prevData, company: e.target.value }))}
+                    placeholder="Company"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mr-2 mb-2 md:mb-0"
+                  />
+                  <input
+                    type="text"
+                    name="position"
+                    value={experienceFormData.position}
+                    onChange={(e) => setExperienceFormData((prevData) => ({ ...prevData, position: e.target.value }))}
+                    placeholder="Position"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mr-2 mb-2 md:mb-0"
+                  />
+                  <input
+                    type="text"
+                    name="startDate"
+                    value={experienceFormData.startDate}
+                    onChange={(e) => setExperienceFormData((prevData) => ({ ...prevData, startDate: e.target.value }))}
+                    placeholder="Start Date"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mr-2 mb-2 md:mb-0"
+                  />
+                  <input
+                    type="text"
+                    name="endDate"
+                    value={experienceFormData.endDate}
+                    onChange={(e) => setExperienceFormData((prevData) => ({ ...prevData, endDate: e.target.value }))}
+                    placeholder="End Date"
+                    className="w-full border border-gray-600 rounded-md px-3 py-2 bg-gray-900 text-white mb-2 md:mb-0"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 border-none"
+                >
+                  Add Experience
+                </button>
+              </div>
+            </form>
+            <div className="text-right">
+              <button
+                type="button"
+                onClick={() => setShowForm(false)}
+                className="px-4 py-2 bg-red-600 text-white rounded-md ml-2 hover:bg-red-700 border-none"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ApplicantProfile;
+
